@@ -1,0 +1,62 @@
+/* --- Home.css --- */
+
+/* メッセージコンテナの基本的なスタイル */
+.love-message {
+  font-family: "monospace", sans-serif;
+  color: #333;
+  background-color: #f9f9f9;
+  padding: 25px;
+  border-radius: 16px;
+  max-width: 400px;
+  margin: 50px auto;
+  overflow: hidden; /* コンテナ全体のはみ出しを隠す */
+  cursor: pointer;
+}
+
+/* 個々の行に適用するスタイル */
+.typewriter-line {
+  white-space: pre-wrap; /* 行内での改行を有効にするが、テキストは自動折り返ししない */
+  overflow: hidden; /* はみ出したテキストを隠す */
+  margin: 0;
+  padding-bottom: 5px; /* 行間のスペース */
+  box-sizing: border-box;
+
+  /* カーソルはJavaScriptでis-typingクラスが付いている場合に表示される */
+  border-right: 0.15em solid transparent; /* デフォルトでカーソルは透明 */
+}
+
+/* 現在タイプ中の行にカーソル点滅アニメーションを適用 */
+.typewriter-line.is-typing {
+  border-right-color: orange; /* カーソルを表示 */
+  animation: blink-caret 0.75s step-end infinite; /* カーソル点滅アニメーションを適用 */
+}
+
+/* アニメーションが完全に終了した後、最後の行にカーソルを表示し続ける */
+/* .love-message が 'animating' クラスを持たなくなり、
+   かつ最後の行である p タグに is-typing が付いていない場合 */
+.love-message:not(.animating) .typewriter-line:last-child {
+  border-right-color: orange; /* 最後の行にカーソルを表示 */
+  animation: blink-caret 0.75s step-end infinite; /* 点滅も続ける */
+}
+
+/* JavaScript側でanimationActiveがfalseになった場合にカーソルが消えないようにする */
+/* is-typingが外れても、アニメーションが非アクティブなら最後の行にカーソルを残す */
+.love-message .typewriter-line:last-child {
+  /* ここは上記 .love-message:not(.animating) .typewriter-line:last-child と競合しないように注意 */
+}
+
+/* カーソル点滅アニメーションのキーフレーム */
+@keyframes blink-caret {
+  from,
+  to {
+    border-color: transparent;
+  }
+  50% {
+    border-color: orange;
+  }
+}
+
+/* 日本語テキストのフォントサイズ調整 (任意) */
+.love-message.japanese-text {
+  font-size: 1.1em;
+}
